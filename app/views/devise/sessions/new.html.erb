@@ -1,0 +1,27 @@
+<% content_for :principal_content do %>
+  <div class="row">
+      <div class="col-lg-8 col-lg-offset-2">
+          <h2>Login</h2>
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+              <div class="row">
+                  <div class="form-group col-xs-12 floating-label-form-group">
+                      <label for="email">Email</label>
+                      <%= f.email_field :email, autofocus: true, :class => "form-control", :placeholder => "Email" %>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="form-group col-xs-12 floating-label-form-group">
+                      <label for="email">Password</label>
+                      <%= f.password_field :password, autocomplete: "off", :class => "form-control", :placeholder => "Password" %>
+                  </div>
+              </div>
+              <br>
+              <div class="row">
+                  <div class="form-group col-xs-12">
+                      <div><%= f.submit "Login", :class => "btn btn-lg btn-primary"%></div>
+                  </div>
+              </div>
+          <% end %>
+      </div>
+  </div>
+<% end %>

@@ -1,0 +1,30 @@
+<div class="well">
+  <%= form_for(@post) do |f| %>
+    <% if @post.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+        <ul>
+        <% @post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <h4>Name:</h4>
+      <textarea id="post_name" name="post[name]" class="form-control" rows="1" autofocus="autofocus"><%=@post.name%></textarea>
+    </div>
+    <div class="field">
+      <h4>Text:</h4>
+      <textarea id="post_text" name="post[text]" class="form-control"><%=@post.text%></textarea>
+    </div>
+    <br/>
+    <div class="actions">
+      <div><%= f.submit :class => "btn btn-lg btn-primary", :id => "action_post" %></div>
+    </div>
+  <% end %>
+</div>
+
+<hr>

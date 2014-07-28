@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Blog with Rails Framework 4.1.1">
+    <meta name="author" content="Tony Lattke">
+	
+	<title>Rails - Blog</title>
+	
+	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>	
+
+	<%= stylesheet_link_tag "bootstrap" %>
+    <!-- Fonts -->
+
+	<!-- IE8 support for HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+	<![endif]-->
+	<%= csrf_meta_tags %>
+</head>
+<body>
+    <% if notice %>
+        <p class="alert alert-success"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+        <p class="alert alert-danger"><%= alert %></p>
+    <% end %>
+	<div class="container">
+		<a href="/">
+			<img id="banner" src="http://placehold.it/1170x300" class="img-responsive">
+		</a>
+
+		<div class="row">
+            <div class="col-lg-8">
+                <%= yield :principal_content %>
+                <%= yield %>
+            </div>
+
+            <div class="col-lg-4">
+                <!-- list of years -->
+                <div class="well">
+                    <h4>Last posts</h4>
+                    <ul class="list-unstyled">
+                        <% @years.each do |year| %>
+                            <li>
+                                <a href="/year/<%= year %>"><%= year %></a>
+                            </li>
+                        <% end %>
+                    </ul>
+                </div>
+                <!-- list of years -->
+                
+                <% if user_signed_in? %>
+                <!-- New Post -->
+                <div class="well">
+                    <%= link_to 'Create Post', new_post_path %>
+                </div>
+                <!-- New Post -->
+                <% end %>
+
+                <!-- Logout -->
+                <div class="well">
+                    <% if user_signed_in? %>
+                        <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+                    <% else %>
+                        <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+                    <% end %>
+                </div>
+                <!-- Logout -->
+                
+                <div class="well">
+                    <a href="/posts.json">Export all posts to Json</a>
+                </div>
+                
+
+                <div class="well">
+                	<%= image_tag("logo-tony.png", :alt => "rss feed", :id => "logo") %>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+		<footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Developed by Tony Lattke - Django Blog 2014</p>
+                </div>
+            </div>
+        </footer>
+	</div>
+	<!-- /.container -->
+
+    <!-- JavaScript -->
+	<%= javascript_include_tag "jquery-1.10.2" %>
+	<%= javascript_include_tag "bootstrap" %>
+
+    <%= yield :javascript_content %>
+</body>
+</html>

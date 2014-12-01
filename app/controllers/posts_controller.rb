@@ -56,7 +56,7 @@ class PostsController < ApplicationController
   # DELETE /posts/1.json
   def destroy
     @post.destroy
-    respond_to posts_path
+    redirect_to "/"
   end
 
   def year
